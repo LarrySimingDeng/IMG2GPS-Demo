@@ -85,7 +85,7 @@ export default function App() {
           <h1>Guess where you are @ Penn Engineering</h1>
           <p className="lede">
             Snap a pic and we&apos;ll guess your coordinates. Pick a sample on the left; after a few seconds of thinking,
-            you&apos;ll see lat/lng, a description, and a map pin. Swap in your own backend when you&apos;re ready.
+            you&apos;ll see lat/lng, a description, and a map pin.
           </p>
           <div className="pill-row">
             <span className="pill pill--accent">Swin Transformer</span>

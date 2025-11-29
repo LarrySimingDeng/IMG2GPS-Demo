@@ -12,7 +12,10 @@ const pipeline = [
     label: 'LLM enrichment',
     detail: 'Predicted coords + building cues go to GPT to craft a tailored prompt and narrative',
   },
-  { label: 'Render', detail: 'Map pin drops; markdown streams a description + historical background' },
+  {
+    label: 'Render',
+    detail: 'Map pin drops, coordinates lock in, and we stream the Penn landmark background',
+  },
 ]
 
 const randomLoadingMs = () => 2600 + Math.random() * 1800
@@ -228,24 +231,32 @@ export default function App() {
           </section>
 
           <section className="card pipeline-card">
-            <div>
-              <p className="eyebrow">How it works</p>
-              <h3>Image2GPS flow</h3>
-              <p className="microcopy">
-                Shot -&gt; Swin predicts your coordinates -&gt; we hand the lat/lng to GPT with a custom prompt -&gt;
-                it writes the building/landmark description + background -&gt; map + markdown render together.
-              </p>
-            </div>
-            <div className="pipeline-steps">
-              {pipeline.map((step) => (
-                <div key={step.label} className="pipeline-step">
-                  <div className="step-dot" />
-                  <div>
-                    <div className="label">{step.label}</div>
-                    <div className="microcopy">{step.detail}</div>
+            <p className="eyebrow">How it works</p>
+            <h3>Image2GPS pipeline</h3>
+            <p className="microcopy">
+              One photo flows through four handoff stages: capture, geo inference, language enrichment, and a final
+              render that drops a map pin with Penn-specific storytelling.
+            </p>
+            <div className="timeline">
+              {pipeline.map((step, index) => (
+                <div key={step.label} className="timeline__row">
+                  <div className="timeline__marker">
+                    <span className="timeline__index">{index + 1}</span>
+                    {index < pipeline.length - 1 && <span className="timeline__connector" aria-hidden="true" />}
+                  </div>
+                  <div className="timeline__card">
+                    <h4>{step.label}</h4>
+                    <p className="microcopy">{step.detail}</p>
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="timeline__outcome">
+              <div className="label">Outputs</div>
+              <p className="microcopy">
+                Locked coordinates, GPT-authored narration, and a synced map preview—ready to explore the Penn campus in
+                context.
+              </p>
             </div>
           </section>
         </main>
